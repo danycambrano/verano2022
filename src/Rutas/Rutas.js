@@ -6,6 +6,7 @@ import Layout from '../Componentes/Layouts/Layout';
 
 import Home from '../Paginas/Home';
 import About from '../Paginas/About';
+import Formularios from '../Componentes/Formularios';
 import NotFound from '../Paginas/NotFound';
 
 function Rutas(){
@@ -16,7 +17,7 @@ function Rutas(){
                    <Routes>
                        <Route exact path="/" element={<Home/>}/>
                        <Route exact path="/about" element={<About/>}/>
-                       
+                       <Route exact path='/formularios' element={<Formularios/>}/>                       
                        <Route path='*' element={<NotFound/>}/>
                    </Routes>
                </Layout>

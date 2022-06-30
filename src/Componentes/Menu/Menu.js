@@ -31,7 +31,7 @@ function Menu() {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/formulario">Formularios</Link>
+              <Link to="/formularios">Formularios</Link>
             </li>
             <li>
               <Link to="/about">About</Link>
