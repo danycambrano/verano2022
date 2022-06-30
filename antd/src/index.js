@@ -1,18 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-//import App from './App';
-
-import 'materialize-css/dist/css/materialize.min.css';
-import 'material-icons/iconfont/material-icons.css';
-import 'antd/dist/antd.min.css';
-import Aplicacion from './Aplicacion';
+import './index.css';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Aplicacion />
+    <App />
   </React.StrictMode>
 );
 
