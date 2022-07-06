@@ -1,8 +1,10 @@
 import React from 'react';
 
+import './Paginas.css'
+
 function NotFound() {
   return (
-    <div>No Existe el link</div>
+    <div className='menu'>No Existe el link</div>
   )
 }
 

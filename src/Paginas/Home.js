@@ -1,98 +1,82 @@
-import React, { useState, useEffect } from "react";
+import React,{useState,useEffect} from "react";
+
+import Axios from "../services/ConexionAxios";
+
+
 
 function Home() {
-  const variablesInicio = {
-    nombre: "",
-    apellidos: "",
-    telefono: "",
-  };
 
-  const [values, setValues] = useState(variablesInicio);
+  const [personas,setPersonas]=useState([]);
 
-  const CambioEstado = (e) => {
-    const { name, value } = e.target;
-    setValues({ ...values, [name]: value });
-  };
+  const Consultar=async()=>{
+    const consulta=await Axios.get('/persona/consultar');
+    setPersonas(consulta.data);
+   // console.log(consulta.data);
+  }
 
-  const Enviar = (e) => {
-    e.preventDefault();
-    console.log(values);
-  };
+  const Eliminar=async(id)=>{
 
-  useEffect(() => {}, []);
+    if(window.confirm("¿Esta segure de eliminar el date?")){
+      await Axios.delete(`/persona/eliminar/${id}`);
+      console.log('Datos eliminados correctamente');
+    }
+   
+    Consultar();
+  }
 
+  useEffect(() => {
+   Consultar();
+   
+  }, [])
+  
   return (
-    <div>
-      <div class="row">
-        <div class="col s12 m12">
-          <div class="card blue-grey darken-1">
-            <div class="card-content white-text">
-              <span class="card-title">Formulario de altas de usuarios</span>
-              <div class="row">
-                <form class="col s12">
-                  <div class="row">
-                    <div class="input-field col s6">
-                      <input
-                        placeholder="Placeholder"
-                        id="first_name"
-                        type="text"
-                        class="validate"
-                      />
-                      <label for="first_name">First Name</label>
-                    </div>
-                    <div class="input-field col s6">
-                      <input id="last_name" type="text" class="validate" />
-                      <label for="last_name">Last Name</label>
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input id="password" type="password" class="validate" />
-                      <label for="password">Password</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="input-field col s12">
-                      <input id="email" type="email" class="validate" />
-                      <label for="email">Email</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col s12">
-                      This is an inline input field:
-                      <div class="input-field inline">
-                        <input
-                          id="email_inline"
-                          type="email"
-                          class="validate"
-                        />
-                        <label for="email_inline">Email</label>
-                        <span
-                          class="helper-text"
-                          data-error="wrong"
-                          data-success="right"
-                        >
-                          Helper text
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </form>
-              </div>
-            </div>
-            <div class="card-action">
-              <a class="waves-effect waves-light btn">
-                <i class="material-icons left">cloud</i>button
-              </a>
-              <a class="waves-effect waves-light btn">
-                <i class="material-icons right">cloud</i>button
-              </a>
-            </div>
-          </div>
-        </div>
+   
+<div className="container-fluid p-2">
+<div class="row">
+  {personas.map((persona,index)=>{
+    return(
+<div class="col-sm-4">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{persona.nombre}</h5>
+        <p class="card-text">{persona.email},{persona.telefono}</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <button type="button" class="btn btn-danger" onClick={()=>Eliminar(persona._id)}>Eliminar</button>
       </div>
     </div>
+  </div>
+    )
+  })} 
+ 
+</div>
+
+<hr/>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Clave</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellidos</th>
+    </tr>
+  </thead>
+  <tbody>
+    {personas.map((persona,index)=>{
+      return(
+        <tr>
+        <th scope="row">{index+1}</th>
+        <td>{persona.clave}</td>
+        <td>{persona.nombre}</td>
+        <td>{persona.apellidos}</td>
+      </tr>
+      )
+    })}
+   
+   
+  </tbody>
+</table>
+</div>
   );
 }
 

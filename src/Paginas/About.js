@@ -1,8 +1,10 @@
 import React from 'react'
 
+import './Paginas.css';
+
 function About() {
   return (
-   
+   <div className='menu'>
     <div class="row">
 
       <div class="col s12 m4">
@@ -58,7 +60,7 @@ function About() {
       </div>
 
     </div>           
-    
+    </div>
   )
 }
 

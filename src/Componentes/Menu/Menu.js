@@ -2,57 +2,54 @@ import React,{useEffect} from "react";
 
 import {Link} from 'react-router-dom';
 
-import M from 'materialize-css';
+
+
 
 function Menu() {
 
-  const colapsado=()=>{
-    var elems = document.querySelectorAll('.sidenav');
-    M.Sidenav.init(elems);
-  }
+  
 
 
-  useEffect(() => {
-   colapsado();
-  }, [])
+
   
   return (
-    <div>
-      <nav>
-        <div className="nav-wrapper">
-          <Link to="/" class="brand-logo">
-            Logo
-          </Link>
-          <a href="#" data-target="mobile-demo" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
+    <div className="p-4">
+     <nav class="navbar navbar-expand-lg bg-dark">
+  <div class="container-fluid">
+    <Link className="navbar-brand" to="/">Mi app</Link>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <Link class="nav-link active" aria-current="page" to="/">Home</Link>
+        </li>
+        <li class="nav-item">
+          <Link class="nav-link" to="/formularios">Formulario</Link>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
           </a>
-          <ul class="right hide-on-med-and-down">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/formularios">Formularios</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-            
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"/></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
           </ul>
-        </div>
-      </nav>
-
-      <ul class="sidenav" id="mobile-demo">
-        <li>
-          <Link to="/">Home</Link>
         </li>
-        <li>
-          <Link to="/formulario">Formulario</Link>
+        <li class="nav-item">
+          <a class="nav-link disabled">Disabled</a>
         </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        
       </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
     </div>
   );
 }
