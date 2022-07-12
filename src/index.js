@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'material-icons/iconfont/material-icons.css';
 
 import Aplicacion from './Aplicacion';
 import reportWebVitals from './reportWebVitals';

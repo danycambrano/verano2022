@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Axios from "../services/ConexionAxios";
+
+import {useParams,useNavigate} from 'react-router-dom';
+
+import {toast} from 'react-toastify';
 
 function Formularios() {
   const variables = {
+    _id:"",
     clave: "",
     nombre: "",
     apellidos: "",
@@ -11,6 +16,9 @@ function Formularios() {
   };
 
   const [valores, setValores] = useState(variables);
+
+  const params=useParams();
+  const navigate=useNavigate();
 
   const cambioEstado = (e) => {
     const { name, value } = e.target;
@@ -26,15 +34,56 @@ Axios.post('/persona/guardar',{
 telefono:valores.telefono,
 email:valores.email
 }).then(()=>{
-  console.log('Registro guardado con exito');
+ toast("Registro guardado con éxito",{
+  position:"top-center",
+  type:"success",
+  autoClose: 5000
+ })
 })
+setValores("");
 }
+
+const onePersona=async(id)=>{
+  const buscarOne=await Axios.get('/persona/consultarOne/'+id);
+  setValores(buscarOne.data);
+}
+
+const updatePersona=async()=>{
+  await Axios.put(`/persona/actualizar/${params.id}`,{
+    clave: valores.clave,
+    nombre: valores.nombre,
+    apellidos: valores.apellidos,
+    email: valores.email,
+    telefono:valores.telefono
+  }).then(()=>{
+    toast("Los datos se han actualizado correctamente",{
+      position:"top-right",
+      type:"info",
+      autoClose:5000
+    })
+  })
+  navigate('/');
+}
+
 
 
   const Enviar = (e) => {
     e.preventDefault();
-    Guardar();
+
+    if(valores._id===""){
+      Guardar();
+    }else{
+      updatePersona();
+    }
+    
   };
+
+  useEffect(() => {
+   onePersona(params.id);
+  }, [params.id])
+  
+
+   
 
   return (
     <div className="container-fluid p-4">
@@ -119,7 +168,7 @@ email:valores.email
               </div>
 
               <button type="submit" className="btn btn-primary">
-                Enviar
+                {valores._id === "" ? "Enviar":"Actualizar"}
               </button>
             </form>
           </p>

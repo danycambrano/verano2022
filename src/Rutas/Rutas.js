@@ -17,7 +17,8 @@ function Rutas(){
                    <Routes>
                        <Route exact path="/" element={<Home/>}/>
                        <Route exact path="/about" element={<About/>}/>
-                       <Route exact path='/formularios' element={<Formularios/>}/>                       
+                       <Route exact path='/formularios' element={<Formularios/>}/>
+                       <Route exact path='/formularios/:id' element={<Formularios/>}/>                        
                        <Route path='*' element={<NotFound/>}/>
                    </Routes>
                </Layout>

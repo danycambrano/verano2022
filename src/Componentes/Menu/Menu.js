@@ -5,9 +5,7 @@ import {Link} from 'react-router-dom';
 
 
 
-function Menu() {
-
-  
+function Menu() { 
 
 
 
